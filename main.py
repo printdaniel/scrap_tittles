@@ -19,23 +19,49 @@ class mem_app:
         self.nacionimg.grid(row=0,column=0)
 
         
-        self.frame1=LabelFrame(self.root,text="Texto a memorizar")
+        self.frame1=LabelFrame(self.root,text="Scrap")
         self.frame1.grid(row=1,column=0)
+        
+        btn_scrap = Button(self.root,text='Scrapear Titulos',padx=5,pady=5,bg='#836F41',command=self.scrap_n)
+        btn_scrap.grid(row=2,column=0)
 
-        label_titulo1 = Label(self.root, text='Nombre:',font=('arial', 12, 'bold'),bg="#7C3E48")
-        label_titulo1.grid(row=1, column = 0, sticky='W')
+        """label_titulo1 = Label(self.root, text='Nombre:',font=('arial', 12, 'bold'),bg="#7C3E48")
+        label_titulo1.grid(row=1, column = 0, sticky='W')"""
     
     def scrap_n(self):
         url = 'https://www.lanacion.com.ar/'
         page = requests.get(url)
         
-        soup = BeautifulSoup(page.content,'html.parsers')
+        soup = BeautifulSoup(page.content,'html.parser')
         
         titulos = soup.find_all('h2',"com-title")
         
-        for i in titulos:
+        lst_title = []
+        for i in (titulos):
             sub = i.find_all('a')
-            print(sub[0].attrs.get('title'))
+            #print(sub[0].attrs.get('title'))
+            
+            
+            lst_title.append(sub[0].attrs.get('title'))
+        
+        print (lst_title)    
+            
+        lbl1 =  Label(self.root, text= lst_title[0],font=('arial', 12, 'bold'),bg="#7C3E48")
+        lbl1.grid(row=3,column=0)
+        lbl2 =  Label(self.root, text=lst_title[1],font=('arial', 12, 'bold'),bg="#7C3E48")
+        lbl2.grid(row=4,column=0)
+        lbl3 =  Label(self.root, text=lst_title[2],font=('arial', 12, 'bold'),bg="#7C3E48")
+        lbl3.grid(row=5,column=0)
+        lbl4 =  Label(self.root, text=lst_title[3],font=('arial', 12, 'bold'),bg="#7C3E48")
+        lbl4.grid(row=6,column=0)
+        lbl5 =  Label(self.root, text=lst_title[4],font=('arial', 12, 'bold'),bg="#7C3E48")
+        lbl5.grid(row=7,column=0)
+            
+     
+           
+            
+        
+            
         
 
 
